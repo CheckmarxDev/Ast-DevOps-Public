@@ -14,7 +14,7 @@ function check_command_exit_status() {
 if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
   echo "AWS Access Key is messing"
   echo "Export federated AWS variables from OKTA"
-  echo "Link to Checkmarx OKTA: https://checkmarx.okta.com/"
+  echo "Link to Checkmarx OKTA: https://d-93670137ee.awsapps.com/start#/"
   return 1
 fi
 
