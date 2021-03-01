@@ -13,7 +13,9 @@ function check_command_exit_status() {
 
 if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
   echo "AWS Access Key is messing"
-  return 5
+  echo "Export federated AWS variables from OKTA"
+  echo "Link to Checkmarx OKTA: https://checkmarx.okta.com/"
+  return 1
 fi
 
 _AWS_ROLE_NAME="Jenkins-Role"
