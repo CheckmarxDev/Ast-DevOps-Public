@@ -18,6 +18,12 @@ if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
   return 1
 fi
 
+if [ -z "${AWS_REGION}" ]; then
+  echo "AWS_REGION is messing using [eu-west-1] as default"
+  export AWS_REGION=eu-west-1  
+fi
+
+
 _AWS_ROLE_NAME="Jenkins-Role"
 _CREDS_FILE=$(uuidgen)
 _SESSION_NAME=$(uuidgen)
