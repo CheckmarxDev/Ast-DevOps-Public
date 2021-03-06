@@ -57,3 +57,4 @@ echo "Available cluester in AWS_REGION=eu-west-1"
 aws eks list-clusters | jq .
 
 echo "Next: e.g > aws eks update-kubeconfig --name ClusterName --region eu-west-1"
+rm -f ${_CREDS_FILE}
