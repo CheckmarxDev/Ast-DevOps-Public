@@ -23,6 +23,11 @@ if [ -z "${AWS_REGION}" ]; then
   export AWS_REGION=eu-west-1
 fi
 
+if [ -z "${AWS_PROFILE}" ]; then
+  echo "AWS_PROFILE is messing using [cxast-dev] as default"
+  export AWS_PROFILE=cxast-dev
+fi
+
 
 _AWS_ROLE_NAME="EKS-Admins"
 _CREDS_FILE=$(uuidgen)
@@ -33,7 +38,7 @@ _JSON=$(aws sts get-caller-identity)
 user_arn=$(echo ${_JSON} | jq ."Arn")
 user_account_id=$(echo ${_JSON} | jq -r ."Account")
 
-aws sts assume-role --profile $1 --role-arn "arn:aws:iam::${user_account_id}:role/${_AWS_ROLE_NAME}" --role-session-name ${_SESSION_NAME} > ${_CREDS_FILE}
+aws sts assume-role --profile $AWS_PROFILE --role-arn "arn:aws:iam::${user_account_id}:role/${_AWS_ROLE_NAME}" --role-session-name ${_SESSION_NAME} > ${_CREDS_FILE}
 check_command_exit_status $?
 
 # export new aws vars
