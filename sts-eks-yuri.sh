@@ -11,12 +11,12 @@ function check_command_exit_status() {
   fi
 }
 
-if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
-  echo "AWS Access Key is messing"
-  echo "Export federated AWS variables from OKTA"
-  echo "Link to Checkmarx OKTA: https://d-93670137ee.awsapps.com/start#/"
-  return 1
-fi
+# if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
+#   echo "AWS Access Key is messing"
+#   echo "Export federated AWS variables from OKTA"
+#   echo "Link to Checkmarx OKTA: https://d-93670137ee.awsapps.com/start#/"
+#   return 1
+# fi
 
 if [ -z "${AWS_REGION}" ]; then
   echo "AWS_REGION is messing using [eu-west-1] as default"
