@@ -20,11 +20,11 @@ fi
 
 if [ -z "${AWS_REGION}" ]; then
   echo "AWS_REGION is messing using [eu-west-1] as default"
-  export AWS_REGION=eu-west-1  
+  export AWS_REGION=eu-west-1
 fi
 
 
-_AWS_ROLE_NAME="Jenkins-Role"
+_AWS_ROLE_NAME="EKS-Admins"
 _CREDS_FILE=$(uuidgen)
 _SESSION_NAME=$(uuidgen)
 
@@ -33,18 +33,7 @@ _JSON=$(aws sts get-caller-identity)
 user_arn=$(echo ${_JSON} | jq ."Arn")
 user_account_id=$(echo ${_JSON} | jq -r ."Account")
 
-
-# Get existing Role jnos
-_JSON=$(aws iam get-role --role-name Jenkins-Role | jq .)
-check_command_exit_status $?
-
-echo ${_JSON} | jq ".Role.AssumeRolePolicyDocument.Statement[0].Principal.AWS += [${user_arn}]" | jq ".Role.AssumeRolePolicyDocument" > "${_AWS_ROLE_NAME}.json" && echo "Role json created [ ${_AWS_ROLE_NAME}.json ]"
-check_command_exit_status $?
-
-aws iam update-assume-role-policy --role-name ${_AWS_ROLE_NAME} --policy-document file://"${_AWS_ROLE_NAME}.json" && echo "Role updated"
-check_command_exit_status $?
-
-aws sts assume-role --role-arn "arn:aws:iam::${user_account_id}:role/${_AWS_ROLE_NAME}" --role-session-name ${_SESSION_NAME} > ${_CREDS_FILE}
+aws sts assume-role --profile $1 --role-arn "arn:aws:iam::${user_account_id}:role/${_AWS_ROLE_NAME}" --role-session-name ${_SESSION_NAME} > ${_CREDS_FILE}
 check_command_exit_status $?
 
 # export new aws vars
