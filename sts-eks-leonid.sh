@@ -7,15 +7,15 @@ function check_command_exit_status() {
     rm -f ${_AWS_ROLE_NAME}.json
     rm -f ${_CREDS_FILE}
     unset _JSON
-    return 1
+    exit 1
   fi
 }
 
 if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
-  echo "AWS Access Key is messing"
+  echo "AWS_ACCESS_KEY_ID Access Key is messing"
   echo "Export federated AWS variables from OKTA"
   echo "Link to Checkmarx OKTA: https://d-93670137ee.awsapps.com/start#/"
-  return 1
+  exit 1
 fi
 
 if [ -z "${AWS_REGION}" ]; then
