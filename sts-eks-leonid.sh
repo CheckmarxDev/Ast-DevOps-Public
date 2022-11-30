@@ -24,7 +24,7 @@ if [ -z "${AWS_REGION}" ]; then
 fi
 
 
-_AWS_ROLE_NAME="EKS-Admins"
+_AWS_ROLE_NAME="Cx-Components-CI-Role"
 _CREDS_FILE=$(uuidgen)
 _SESSION_NAME=$(uuidgen)
 
