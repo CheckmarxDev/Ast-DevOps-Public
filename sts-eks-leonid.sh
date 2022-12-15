@@ -25,7 +25,7 @@ fi
 
 
 _AWS_ROLE_NAME="Cx-Components-CI-Role"
-_AWS_ROLE_NAME="EKS-Admins"
+# _AWS_ROLE_NAME="EKS-Admins"
 _CREDS_FILE=$(uuidgen)
 _SESSION_NAME=$(uuidgen)
 
